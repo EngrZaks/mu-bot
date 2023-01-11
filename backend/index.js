@@ -58,7 +58,7 @@ const detectIntent = async (languageCode, queryText, sessionId) => {
 app.get("/", (req, res) => res.send("hello from MU Chatbot"));
 
 // intent detection route
-app.post("/intent", async (req, res) => {
+app.post("/detect", async (req, res) => {
   const { queryText, sessionId } = req.body;
   console.log(queryText, sessionId, req.body);
   try {
@@ -113,6 +113,6 @@ detectIntent("en", "hello", "3#3333rdfffrr45t65555")
 //   return responses[0];
 // }
 
-detectIntent(PROJECTID, "123hulaba", "benefits for alumni", "", "en").then(
-  (data) => console.log(data)
-);
+// detectIntent(PROJECTID, "123hulaba", "benefits for alumni", "", "en").then(
+//   (data) => console.log(data)
+// );
