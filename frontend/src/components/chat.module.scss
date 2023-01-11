@@ -1,0 +1,10 @@
+// .chat {
+//   width: 50%;
+// }
+.chat:nth-of-type(even) {
+  background-color: black;
+  color: red;
+  //   text-align: right;
+  margin-left: auto;
+  width: fit-content;
+}
