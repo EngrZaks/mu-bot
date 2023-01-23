@@ -15,6 +15,7 @@ function ChatInput({ handleSubmit, input, handleInput }) {
         maxWidth: 700,
         display: "flex",
         // position: "absolute",
+        backgroundColor: "white",
         left: "50%",
         transform: "translateX(-50%)",
       }}
