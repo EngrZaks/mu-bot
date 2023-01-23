@@ -1,10 +1,26 @@
-// .chat {
-//   width: 50%;
-// }
+.chat {
+  max-width: 400px;
+  padding: 1rem;
+}
+.chat:nth-of-type(odd) {
+  border: 1px solid #e3e3e3;
+}
 .chat:nth-of-type(even) {
-  background-color: black;
-  color: red;
+  background-color: rgb(57, 43, 43);
+  color: white;
+  margin: 1rem;
   //   text-align: right;
   margin-left: auto;
   width: fit-content;
+}
+
+.info {
+  background-color: rgba(57, 43, 43, 0.596);
+  color: white;
+  max-width: 400px;
+  margin: 1rem;
+  padding: 1rem;
+  @media screen and (min-width: 500px) {
+    margin: 1rem auto;
+  }
 }
