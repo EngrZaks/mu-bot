@@ -10,6 +10,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//configuring cors
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 // gcloud credentials
 const CREDENTIALS = JSON.parse(fs.readFileSync("credentials.json"));
 
@@ -45,7 +53,7 @@ const detectIntent = async (languageCode, queryText, sessionId) => {
     const responses = await sessionClient.detectIntent(request);
     const result = responses[0].queryResult;
     return {
-      respons: result.fulfillmentText,
+      response: result.fulfillmentText,
     };
   } catch (error) {
     return {
