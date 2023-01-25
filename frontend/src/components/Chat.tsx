@@ -1,4 +1,11 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+} from "@mui/material";
+import uuid from "react-uuid";
 import React, { FormEvent, FormEventHandler, RefObject } from "react";
 import ChatInput from "./ChatInput";
 import styles from "./chat.module.scss";
@@ -7,10 +14,13 @@ const token = import.meta.env.VITE_TOKEN;
 function Chat() {
   const [chats, setChats] = React.useState(["let's chat"]);
   const [input, setInput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
   const dummy: RefObject<HTMLDivElement> = React.useRef(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     setChats([...chats, input]);
     setInput("");
     dummy.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,21 +34,24 @@ function Chat() {
       headers: reqHeaders,
       body: JSON.stringify({
         queryText: input,
-        sessionId: "122abssd",
+        sessionId: uuid(),
       }),
     };
 
+    setLoading(true);
     fetch("http://localhost:8080/detect", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setLoading(false);
         setChats((state) => {
           return [...state, data.response];
         });
+        dummy.current?.scrollIntoView({ behavior: "smooth" });
       });
   };
 
-  const handleInput = (e: FormEvent) => {
+  const handleInput = (e: FormEvent<HTMLFormElement>) => {
     setInput(e.target.value);
   };
   return (
@@ -77,8 +90,13 @@ function Chat() {
                 <Typography>{chat}</Typography>
               </Box>
             ))}
-          <div ref={dummy}></div>
+          <div style={{ marginTop: 50 }} ref={dummy}></div>
         </Box>
+        {/* <Box sx={{ m: "0 auto", width: "10px" }}> */}
+        {/* {loading && ( */}
+        <CircularProgress />
+        {/* )} */}
+        {/* </Box> */}
       </Box>
       <ChatInput
         handleInput={handleInput}
