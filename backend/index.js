@@ -125,3 +125,5 @@ app.listen(PORT, () => console.log(`server is up and running on port ${PORT}`));
 // detectIntent(PROJECTID, "123hulaba", "benefits for alumni", "", "en").then(
 //   (data) => console.log(data)
 // );
+
+module.exports = app;
