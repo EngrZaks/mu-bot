@@ -84,6 +84,8 @@ app.post("/detect", async (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`server is up and running on port ${PORT}`));
 
+module.exports = app;
+
 // detectIntent("en", "hello", "3#3333rdfffrr45t65555")
 //   .then((result) => console.log(result))
 //   .catch((e) => console.log(e));
@@ -125,5 +127,3 @@ app.listen(PORT, () => console.log(`server is up and running on port ${PORT}`));
 // detectIntent(PROJECTID, "123hulaba", "benefits for alumni", "", "en").then(
 //   (data) => console.log(data)
 // );
-
-module.exports = app;
