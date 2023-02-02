@@ -6,7 +6,13 @@ import {
   Typography,
 } from "@mui/material";
 import uuid from "react-uuid";
-import React, { FormEvent, FormEventHandler, RefObject } from "react";
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  FormEvent,
+  FormEventHandler,
+  RefObject,
+} from "react";
 import ChatInput from "./ChatInput";
 import styles from "./chat.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -62,8 +68,9 @@ function Chat() {
     } else addChat(data.response);
   };
 
-  const handleInput = (e: FormEvent<HTMLFormElement>) => {
+  const handleInput = (e: ChangeEvent) => {
     setInput((e.target as HTMLInputElement).value);
+    console.log(e);
   };
   return (
     <Box>
