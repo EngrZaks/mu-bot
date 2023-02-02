@@ -2,15 +2,16 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FormEvent } from "react";
 
 function ChatInput({
   handleSubmit,
   input,
   handleInput,
 }: {
-  handleSubmit: () => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   input: string;
-  handleInput: () => void;
+  handleInput: (e: FormEvent<HTMLFormElement>) => void;
 }) {
   return (
     <form
