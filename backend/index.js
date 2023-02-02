@@ -3,7 +3,7 @@ require("dotenv").config();
 const fs = require("fs");
 const express = require("express");
 var bodyParser = require("body-parser");
-const { query } = require("express");
+const uuid = require("uuid");
 
 // initialise express app
 const app = express();
@@ -19,10 +19,12 @@ app.use(
 );
 
 // gcloud credentials
-const CREDENTIALS = JSON.parse(fs.readFileSync("credentials.json"));
+// const CREDENTIALS = JSON.parse(fs.readFileSync("credentials.json"));
+const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 
 // gcloud project ID
 const PROJECTID = CREDENTIALS.project_id;
+console.log(PROJECTID);
 
 // dialogflow client configuration
 const CONFIGURATION = {
@@ -68,7 +70,6 @@ app.get("/", (req, res) => res.send("hello from MU Chatbot"));
 // intent detection route
 app.post("/detect", async (req, res) => {
   const { queryText, sessionId } = req.body;
-  console.log(queryText, sessionId, req.body);
   try {
     const data = await detectIntent("en", queryText, sessionId);
     res.status(200).send(data);
@@ -82,6 +83,8 @@ app.post("/detect", async (req, res) => {
 // starting the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`server is up and running on port ${PORT}`));
+
+module.exports = app;
 
 // detectIntent("en", "hello", "3#3333rdfffrr45t65555")
 //   .then((result) => console.log(result))
