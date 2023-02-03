@@ -17,7 +17,7 @@ function Contacts() {
         component="h2"
         sx={{ textAlign: "center", m: 2 }}
       >
-        Contact Us
+        Contact
       </Typography>
       <Typography>
         Welcome to the Middlesex University Student Alumni Chatbot!
