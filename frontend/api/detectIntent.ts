@@ -21,6 +21,9 @@ export default async function detectIntent(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const { queryText, sessionId } = req.body;
   // configuring client
   const sessionClient = new dialogflow.SessionsClient(CONFIGURATION);
