@@ -53,12 +53,15 @@ function Chat() {
         sessionId: uuid(),
       }),
     };
+    const endpoint =
+      process.env.NODE_ENV === "production"
+        ? "https://mubot.vercel.app/api/detectIntent"
+        : process.env.NODE_END === "development"
+        ? "/api/detectIntent"
+        : "";
 
     setLoading(true);
-    const response = await fetch(
-      "http://localhost:8080/detect",
-      requestOptions
-    );
+    const response = await fetch(endpoint, requestOptions);
     const data = await response.json();
     console.log(response.status);
     if (response.status == 502) {

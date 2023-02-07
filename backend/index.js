@@ -20,6 +20,7 @@ app.use(
 
 // gcloud credentials
 // const CREDENTIALS = JSON.parse(fs.readFileSync("credentials.json"));
+
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 
 // gcloud project ID
@@ -84,7 +85,7 @@ app.post("/detect", async (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`server is up and running on port ${PORT}`));
 
-module.exports = app;
+// module.exports = app;
 
 // detectIntent("en", "hello", "3#3333rdfffrr45t65555")
 //   .then((result) => console.log(result))
