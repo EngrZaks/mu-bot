@@ -1,8 +1,18 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { ChangeEvent, FormEvent } from "react";
 
-function ChatInput({ handleSubmit, input, handleInput }) {
+function ChatInput({
+  handleSubmit,
+  input,
+  handleInput,
+}: {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  input: string;
+  handleInput: (e: ChangeEvent) => void;
+}) {
   return (
     <form
       onSubmit={handleSubmit}
@@ -27,7 +37,7 @@ function ChatInput({ handleSubmit, input, handleInput }) {
         onChange={handleInput}
       />
       <Button variant="contained" type="submit" sx={{ ml: 2 }}>
-        Send
+        <FontAwesomeIcon icon={faPaperPlane} />
       </Button>
     </form>
   );
