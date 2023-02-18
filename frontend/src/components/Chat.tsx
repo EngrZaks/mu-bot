@@ -19,6 +19,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faRobot } from "@fortawesome/free-solid-svg-icons";
 import Intents from "./Intents";
 const token = import.meta.env.VITE_TOKEN;
+console.log(token);
+
+const endpoint =
+  import.meta.env.NODE_ENV === "production"
+    ? "https://mubot.vercel.app/api/detectIntent"
+    : import.meta.env.NODE_END === "development"
+    ? "/api/detectIntent"
+    : "";
+
+console.log(endpoint);
+
+// const endpoint = "ww";
 
 function Chat() {
   const [chats, setChats] = React.useState(["let's chat"]);
@@ -53,15 +65,9 @@ function Chat() {
         sessionId: uuid(),
       }),
     };
-    const endpoint =
-      process.env.NODE_ENV === "production"
-        ? "https://mubot.vercel.app/api/detectIntent"
-        : process.env.NODE_END === "development"
-        ? "/api/detectIntent"
-        : "";
 
     setLoading(true);
-    const response = await fetch(endpoint, requestOptions);
+    const response = await fetch("/api/detectIntent", requestOptions);
     const data = await response.json();
     console.log(response.status);
     if (response.status == 502) {
@@ -73,7 +79,6 @@ function Chat() {
 
   const handleInput = (e: ChangeEvent) => {
     setInput((e.target as HTMLInputElement).value);
-    console.log(e);
   };
   return (
     <Box>

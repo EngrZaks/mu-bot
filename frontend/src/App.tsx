@@ -20,6 +20,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import Contacts from "./components/Contacts";
 import { Routes } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   /**
@@ -36,6 +37,8 @@ export default function App(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  // const navigate = useNavigate();
+  // const history = use
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -49,9 +52,11 @@ export default function App(props: Props) {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
+            <Link to={item == "Home" ? "/" : item}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>
