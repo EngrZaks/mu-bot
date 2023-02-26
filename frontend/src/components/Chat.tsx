@@ -21,17 +21,6 @@ import Intents from "./Intents";
 const token = import.meta.env.VITE_TOKEN;
 console.log(token);
 
-const endpoint =
-  import.meta.env.NODE_ENV === "production"
-    ? "https://mubot.vercel.app/api/detectIntent"
-    : import.meta.env.NODE_END === "development"
-    ? "/api/detectIntent"
-    : "";
-
-console.log(endpoint);
-
-// const endpoint = "ww";
-
 function Chat() {
   const [chats, setChats] = React.useState(["let's chat"]);
   const [input, setInput] = React.useState("");

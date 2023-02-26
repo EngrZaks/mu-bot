@@ -15,7 +15,6 @@ const CONFIGURATION = {
     client_email: CREDENTIALS["client_email"],
   },
 };
-
 // configuring client
 const sessionClient = new dialogflow.SessionsClient(CONFIGURATION);
 
