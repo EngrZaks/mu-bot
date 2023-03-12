@@ -15,12 +15,14 @@ const scrape = async () => {
   $(".listing-news-item > ul")
     .find("li")
     .each((index, element) => {
-      const headline = $(element).find("h2").text();
-      const summery = $(element).find("a > p").text();
-      news.push({ headline, summery });
+      let headline = $(element).find("h2").text();
+      let summary = $(element).find("a > p").text();
+      headline = headline.toUpperCase();
+      news.push({ headline, summary });
     });
   // console.log($(".listing-news-item > ul").find("li"));
-  console.log(news);
+  // console.log(news);
+  return news;
 };
-
-scrape();
+module.exports = scrape;
+// scrape().then((news) => console.log(news));

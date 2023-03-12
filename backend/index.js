@@ -4,7 +4,6 @@ const fs = require("fs");
 const express = require("express");
 var bodyParser = require("body-parser");
 const uuid = require("uuid");
-
 // initialise express app
 const app = express();
 app.use(bodyParser.json());
@@ -18,9 +17,11 @@ app.use(
   })
 );
 
+// fulfillment
+const { WebhookClient } = require("dialogflow-fulfillment");
+const scrape = require("./scrapper");
 // gcloud credentials
 // const CREDENTIALS = JSON.parse(fs.readFileSync("credentials.json"));
-
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 
 // gcloud project ID
@@ -79,6 +80,24 @@ app.post("/detect", async (req, res) => {
     res.status(404).send("Erro getting intent");
     console.log(error);
   }
+});
+
+// mews webhook
+app.post("/news", (req, res) => {
+  const agent = new WebhookClient({ request: req, response: res });
+  async function sendNews(agent) {
+    let newsArr = [];
+    await scrape().then((news) => {
+      news.map((newsObj) => newsArr.push(newsObj));
+    });
+    let randNumer = Math.floor(Math.random() * newsArr.length);
+    const randomNews = newsArr[randNumer];
+    console.log("send news working!", randomNews);
+    agent.add(`${randomNews.headline} : ${randomNews.summary}`);
+  }
+  let intents = new Map();
+  intents.set("GetNews", sendNews);
+  agent.handleRequest(intents);
 });
 
 // starting the server
