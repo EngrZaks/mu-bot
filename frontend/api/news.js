@@ -13,7 +13,7 @@ export default function getNews(req, res) {
     let randindex = Math.floor(Math.random() * newsArr.length);
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
-    agent.add(`${randomNews.headline} : ${randomNews.summary}`);
+    agent.add(`${randomNews.headline} : \n ${randomNews.summary}`);
   }
 
   let intents = new Map();
