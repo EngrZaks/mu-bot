@@ -12,7 +12,7 @@ const scrape = async () => {
   });
   const $ = cheerio.load(response.data);
   // console.log($(".hero-banner"));
-  $(".listing-news-item > ul")
+  $(".strip-boxes-4")
     .find("li")
     .each((index, element) => {
       let headline = $(element).find("h2").text();
