@@ -18,6 +18,7 @@ import styles from "./chat.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faRobot } from "@fortawesome/free-solid-svg-icons";
 import Intents from "./Intents";
+import ChatItem from "./ChatItem";
 const token = import.meta.env.VITE_TOKEN;
 console.log(token);
 
@@ -65,7 +66,7 @@ function Chat() {
       addChat("Network Error, try again");
     } else addChat(data.response);
   };
-
+  // addChat("Hello everyone");
   const handleInput = (e: ChangeEvent) => {
     setInput((e.target as HTMLInputElement).value);
   };
@@ -109,11 +110,7 @@ function Chat() {
         <Box sx={{ p: 4, mb: 8, display: "flex", flexDirection: "column" }}>
           {chats.length > 0 &&
             chats.map((chat) => (
-              <Box key={uuid()} className={styles.chat}>
-                <Typography>{chat}</Typography>
-                <FontAwesomeIcon icon={faUser} className={styles.user} />
-                <FontAwesomeIcon icon={faRobot} className={styles.bot} />
-              </Box>
+              <ChatItem chat={chat} styles={styles} key={uuid()} />
             ))}
           <Box ref={dummy} sx={{ m: "10px auto", width: "50px", mb: "100px" }}>
             {loading && <CircularProgress />}

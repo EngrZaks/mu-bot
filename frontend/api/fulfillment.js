@@ -7,7 +7,7 @@ export default function getNews(req, res) {
   console.log("cloud function working");
   async function sendNews(agent) {
     let newsArr = [];
-    await scrape().then((news) => {
+    await scrapeNews().then((news) => {
       news.map((newsObj) => newsArr.push(newsObj));
     });
     let randindex = Math.floor(Math.random() * newsArr.length);
@@ -24,7 +24,7 @@ export default function getNews(req, res) {
 }
 
 // scrapper function
-async function scrape() {
+async function scrapeNews() {
   let news = [];
   const response = await axios.request({
     method: "GET",
