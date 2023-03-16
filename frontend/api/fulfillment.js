@@ -14,7 +14,7 @@ export default function getNews(req, res) {
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
     agent.add(
-      `<strong style="font-size:1.rem; font-weight:bold;">${randomNews.headline}</strong> <p> ${randomNews.summary}</p>`
+      `<p style="font-size:1.2rem; font-weight:bolder;">${randomNews.headline}</p> <p> ${randomNews.summary}</p>`
     );
   }
 
