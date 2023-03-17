@@ -3,9 +3,12 @@ import axios from "axios";
 import client from "dialogflow-fulfillment";
 import { VercelRequest, VercelResponse } from "@vercel/node";
 
-export default function getNews(req: VercelRequest, res: VercelResponse) {
+export default function fulfillmentHandler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
   const agent = new client.WebhookClient({ request: req, response: res });
-  console.log("cloud function working");
+
   async function sendNews(agent: any) {
     let newsArr: News[] = [];
     await scrapeNews().then((news) => {
@@ -15,12 +18,26 @@ export default function getNews(req: VercelRequest, res: VercelResponse) {
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
     agent.add(
-      `<a href='${randomNews.link}' style="color:black; text-decoration:none; margin:0; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.headline}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
+      `<a href='${randomNews.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin:5px; font-size:1.1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.title}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
     );
+  }
+
+  async function getEvents(agent: any) {
+    let response = `<div>`;
+    let eventsArr: Events[] = [];
+    await scrapeEvent().then((event) => {
+      event.map((eventsObj) => eventsArr.push(eventsObj));
+    });
+    for (const event of eventsArr) {
+      response += `<h5>${event.title}</h5> <p>${event.date}</p>`;
+    }
+    response += "</div>";
+    agent.add(response);
   }
 
   let intents = new Map();
   intents.set("GetNews", sendNews);
+  intents.set("Events", getEvents);
   agent.handleRequest(intents);
 }
 
@@ -39,10 +56,10 @@ export async function scrapeNews() {
   $(".listing-news-item > ul")
     .find("li")
     .each((index, element) => {
-      const headline = $(element).find("h2").text();
+      const title = $(element).find("h2").text();
       const summary = $(element).find("a > p").text();
       const link = $(element).find("a").attr("href");
-      news.push({ headline, summary, link });
+      news.push({ title, summary, link });
     });
   return news;
 }
@@ -75,12 +92,11 @@ const scrapeEvent = async () => {
 
 interface News {
   link: string | undefined;
-  headline?: string;
+  title: string;
   summary?: string;
 }
 interface Events extends News {
   date: string;
-  title: string;
   time: string;
   venue: string;
 }
