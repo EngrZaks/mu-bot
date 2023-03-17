@@ -13,7 +13,7 @@ export default function getNews(req, res) {
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
     agent.add(
-      `<p style="margin:0; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.headline}</p> <p style="margin:0;"> ${randomNews.summary}</p>`
+      `<a href='${randomNews.link}' style="color:black; text-decoration:none; margin:0; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.headline}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
     );
   }
 
