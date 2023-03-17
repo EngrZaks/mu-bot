@@ -1,7 +1,7 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-let news = [];
 const scrape = async () => {
+  let events = [];
   const response = await axios.request({
     method: "GET",
     url: "https://www.mdx.ac.uk/events",
@@ -11,18 +11,18 @@ const scrape = async () => {
     },
   });
   const $ = cheerio.load(response.data);
-  // console.log($(".hero-banner"));
-  $(".strip-boxes-4")
-    .find("li")
-    .each((index, element) => {
-      let headline = $(element).find("h2").text();
-      let summary = $(element).find("a > p").text();
-      headline = headline.toUpperCase();
-      news.push({ headline, summary });
-    });
-  // console.log($(".listing-news-item > ul").find("li"));
-  // console.log(news);
-  return news;
+  $(".strip-boxes-4 > .strip-boxes__item").each((i, el) => {
+    const date = $(el).find(".venue-text").eq(0).text();
+    const name = $(el).find(".event-name").text();
+    const time = $(el).find(".venue-text").eq(1).text();
+    const venue = $(el).find(".venue-text").eq(2).text();
+    const description = $(el).find("p").last().text();
+    const link = $(el).find("a").attr("href");
+
+    const event = { date: date.trim(), name, time, venue, description, link };
+    events.push(event);
+  });
+  return events;
 };
 module.exports = scrape;
-// scrape().then((news) => console.log(news));
+scrape().then((event) => console.log(event));
