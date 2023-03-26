@@ -18,18 +18,18 @@ export default function fulfillmentHandler(
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
     agent.add(
-      `<a href='${randomNews.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin:5px; font-size:1.1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.title}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
+      `<a href='${randomNews.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin-bottom:5px; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.title}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
     );
   }
 
   async function getEvents(agent: any) {
-    let response = `<div>`;
+    let response = `<h3>Upcoming Events</h3> <div>`;
     let eventsArr: Events[] = [];
     await scrapeEvent().then((event) => {
       event.map((eventsObj) => eventsArr.push(eventsObj));
     });
     for (const event of eventsArr) {
-      response += `<h5>${event.title}</h5> <p>${event.date}</p>`;
+      response += `<a href='${event.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin-bottom:5px; background-color:#e3e3e3; padding:10px; margin:5px 0; border-radius:10px;"><h4>${event.title}</h4> <p style="margin:0">📅 ${event.date}</p> <span style="display:flex; align-items:center; justify-content:space-between"><p style="font-family: 'Orbitron', sans-serif; margin:0;">⏱️ ${event.time}</p> <p style="margin:0">📍 ${event.venue}</p></span> </a> `;
     }
     response += "</div>";
     agent.add(response);

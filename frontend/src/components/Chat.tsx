@@ -1,26 +1,11 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import uuid from "react-uuid";
-import React, {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEvent,
-  FormEventHandler,
-  RefObject,
-} from "react";
+import React, { ChangeEvent, FormEvent, RefObject } from "react";
 import ChatInput from "./ChatInput";
 import styles from "./chat.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faRobot } from "@fortawesome/free-solid-svg-icons";
 import Intents from "./Intents";
 import ChatItem from "./ChatItem";
 const token = import.meta.env.VITE_TOKEN;
-console.log(token);
 
 function Chat() {
   const [chats, setChats] = React.useState(["let's chat"]);
@@ -42,7 +27,6 @@ function Chat() {
     setChats((state) => [...state, input]);
     setInput("");
     dummy.current?.scrollIntoView({ behavior: "smooth" });
-    console.log(token);
 
     const reqHeaders = new Headers();
     reqHeaders.append("Content-Type", "application/json");

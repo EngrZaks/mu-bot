@@ -4,24 +4,28 @@ function Contacts() {
   return (
     <Box
       sx={{
-        maxWidth: 800,
-        m: 1,
-        p: 1,
-        position: "absolute",
-        left: "50%",
-        transform: "translateX(-50%)",
+        width: "100vw",
       }}
     >
-      <Typography
-        variant="h4"
-        component="h2"
-        sx={{ textAlign: "center", m: 2 }}
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: "800px",
+          m: "0 auto",
+          p: 2,
+        }}
       >
-        Contact
-      </Typography>
-      <Typography>
-        Welcome to the Middlesex University Student Alumni Chatbot!
-      </Typography>
+        <Typography
+          variant="h4"
+          component="h2"
+          sx={{ textAlign: "center", m: 2 }}
+        >
+          Contact
+        </Typography>
+        <Typography>
+          Welcome to the Middlesex University Student Alumni Chatbot!
+        </Typography>
+      </Box>
     </Box>
   );
 }
