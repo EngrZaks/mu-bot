@@ -8,7 +8,9 @@ import ChatItem from "./ChatItem";
 const token = import.meta.env.VITE_TOKEN;
 
 function Chat() {
-  const [chats, setChats] = React.useState(["let's chat"]);
+  const [chats, setChats] = React.useState([
+    "Hello there! How can we assist you today? Are you looking for information on upcoming events, latest news, alumni connections, resources, opportunities, graduate programs, mentorship opportunities, scholarships, or alumni benefits? Please let us know and we'll be happy to help!",
+  ]);
   const [input, setInput] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
@@ -59,7 +61,7 @@ function Chat() {
       <Box
         sx={{
           width: "100%",
-          maxWidth: 700,
+          maxWidth: 900,
           position: "absolute",
           left: "50%",
           transform: "translateX(-50%)",

@@ -22,7 +22,7 @@ function ChatInput({
         // left: 0,
         padding: 20,
         width: "100%",
-        maxWidth: 700,
+        maxWidth: 800,
         display: "flex",
         // position: "absolute",
         backgroundColor: "white",

@@ -21,20 +21,29 @@ import About from "./components/About";
 import Contacts from "./components/Contacts";
 import { Routes } from "react-router";
 import { useNavigate } from "react-router-dom";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Slide from "@mui/material/Slide";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
+  children: React.ReactElement;
 }
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
 
-export default function App(props: Props) {
-  const { window } = props;
+function HideOnScroll(props: Props) {
+  const { children } = props;
+
+  const trigger = useScrollTrigger();
+
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
+}
+
+export default function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   // const navigate = useNavigate();
@@ -44,64 +53,64 @@ export default function App(props: Props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        MU Chat Bot
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <Link to={item == "Home" ? "/" : item}>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </Link>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <HideOnScroll>
+      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+        <Typography variant="h6" sx={{ my: 2 }}>
+          MU Chat Bot
+        </Typography>
+        <Divider />
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item} disablePadding>
+              <Link to={item == "Home" ? "/" : item}>
+                <ListItemButton sx={{ textAlign: "center" }}>
+                  <ListItemText primary={item} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </HideOnScroll>
   );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Router>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar component="nav" color="default">
-          <Toolbar>
-            <img src={logo} alt="MU logo" height={50} width={45} />
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="end"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, ml: "auto", display: { sm: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
-              MU Chat Bot
-            </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: "#000" }}>
-                  <Link to={item == "Home" ? "/" : item}>{item}</Link>
-                </Button>
-              ))}
-            </Box>
-          </Toolbar>
-        </AppBar>
+        <HideOnScroll>
+          <AppBar component="nav" color="default">
+            <Toolbar>
+              <img src={logo} alt="MU logo" height={50} width={45} />
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="end"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, ml: "auto", display: { sm: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              >
+                MU Chat Bot
+              </Typography>
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                {navItems.map((item) => (
+                  <Button key={item} sx={{ color: "#000" }}>
+                    <Link to={item == "Home" ? "/" : item}>{item}</Link>
+                  </Button>
+                ))}
+              </Box>
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
         <Box component="nav">
           <Drawer
             color="red"
-            container={container}
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}
