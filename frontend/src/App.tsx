@@ -47,31 +47,28 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   // const navigate = useNavigate();
-  // const history = use
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const drawer = (
-    <HideOnScroll>
-      <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-        <Typography variant="h6" sx={{ my: 2 }}>
-          MU Chat Bot
-        </Typography>
-        <Divider />
-        <List>
-          {navItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <Link to={item == "Home" ? "/" : item}>
-                <ListItemButton sx={{ textAlign: "center" }}>
-                  <ListItemText primary={item} />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </HideOnScroll>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        MU Chat Bot
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <Link to={item == "Home" ? "/" : item}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 
   return (
