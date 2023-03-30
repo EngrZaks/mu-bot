@@ -36,6 +36,7 @@
   //   text-align: right;
   margin-left: auto;
   width: fit-content;
+  text-align: right;
   .bot {
     display: none;
   }
@@ -53,6 +54,7 @@
   // max-width: 700px;
   // margin: 1rem;
   padding: 2rem;
+  font-size: larger;
   @media screen and (min-width: 500px) {
     margin: 0 auto;
   }

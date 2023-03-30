@@ -163,7 +163,7 @@ const scrapeEvent = async () => {
     },
   });
   const $ = cheerio.load(response.data);
-  $(".strip-boxes-4 > .strip-boxes__item").each((i, el) => {
+  $(".strip-boxes-2 > .strip-boxes__item").each((i, el) => {
     const date = $(el).find(".venue-text").eq(0).text();
     const title = $(el).find(".event-name").text();
     const time = $(el).find(".venue-text").eq(1).text();

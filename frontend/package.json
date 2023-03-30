@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@google-cloud/dialogflow": "^5.5.0",
     "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.124",
     "@mui/material": "^5.11.3",
     "@types/dompurify": "^3.0.0",
     "@vercel/node": "^2.9.1",

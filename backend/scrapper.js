@@ -1,6 +1,6 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
-const scrape = async () => {
+const scrapeEvent = async () => {
   let events = [];
   const response = await axios.request({
     method: "GET",
@@ -11,7 +11,7 @@ const scrape = async () => {
     },
   });
   const $ = cheerio.load(response.data);
-  $(".strip-boxes-4 > .strip-boxes__item").each((i, el) => {
+  $(".strip-boxes-2 > .strip-boxes__item").each((i, el) => {
     const date = $(el).find(".venue-text").eq(0).text();
     const name = $(el).find(".event-name").text();
     const time = $(el).find(".venue-text").eq(1).text();
@@ -24,6 +24,7 @@ const scrape = async () => {
   });
   return events;
 };
+scrapeEvent().then((events) => console.log("Events", events));
 
 async function scrapeNews() {
   let news = [];
@@ -48,4 +49,4 @@ async function scrapeNews() {
   return news;
 }
 
-scrapeNews().then((event) => console.log(event));
+// scrapeNews().then((news) => console.log("News", news));
