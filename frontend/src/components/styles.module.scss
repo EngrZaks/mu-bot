@@ -1,0 +1,123 @@
+.hero {
+  background-color: #ff0000;
+  color: white;
+  font-weight: bolder;
+  padding: 1rem;
+  margin-top: 1rem;
+  position: relative;
+}
+.chat {
+  max-width: 400px;
+  padding: 1rem;
+  position: relative;
+  .bot,
+  .user {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+  }
+}
+.chat:nth-of-type(odd) {
+  border: 1px solid red;
+  border-radius: 25px 25px 0 25px;
+  .user {
+    display: none;
+  }
+  .bot {
+    left: -28px;
+  }
+}
+.chat:nth-of-type(even) {
+  border-radius: 0 25px 25px 25px;
+  background-color: rgb(57, 43, 43);
+  color: white;
+  margin: 1rem;
+  //   text-align: right;
+  margin-left: auto;
+  width: fit-content;
+  text-align: right;
+  .bot {
+    display: none;
+  }
+  .user {
+    right: -28px;
+    color: black;
+  }
+}
+
+.info {
+  text-align: center;
+  position: relative;
+  background-color: #392b2b98;
+  color: white;
+  // max-width: 700px;
+  // margin: 1rem;
+  padding: 2rem;
+  font-size: larger;
+  @media screen and (min-width: 500px) {
+    margin: 0 auto;
+  }
+}
+
+.chatForm {
+  position: fixed;
+  bottom: 5px;
+  padding: 5px;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  box-shadow: -3px -2px 4px 2px #e3e3e3;
+  border-radius: 5px;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.671);
+  transform: translateX(-50%);
+  .input {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.contact {
+  width: 100vw;
+  .contact_item {
+    display: flex;
+    margin: 10px;
+    margin-top: 30px;
+    align-items: center;
+    padding: 10px;
+    .btn {
+      margin-left: auto;
+    }
+    .icon {
+      margin-right: 10px;
+    }
+  }
+}
+.curve {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.curve svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 90px;
+  transform: rotateY(180deg);
+}
+
+.curve .fill {
+  fill: #ff0000;
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+  .curve svg {
+    width: calc(100% + 1.3px);
+    height: 50px;
+  }
+}
