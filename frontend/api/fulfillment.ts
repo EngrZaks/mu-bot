@@ -18,10 +18,13 @@ export default function fulfillmentHandler(
     const randomNews = newsArr[randindex];
     console.log("send news working!", randomNews);
     agent.add(
-      `<a href='${randomNews.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin-bottom:5px; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.title}</a> <p style="margin:0;"> ${randomNews.summary}</p>`
+      `<a href='${randomNews.link}' target="_blank" style="color:black; display:block; text-decoration:none; margin-bottom:5px; font-size:1rem; font-weight:bolder; background-color:#e3e3e3; padding:10px; margin-buttom:10px; border-radius:8px;">${randomNews.title}</a> 
+      <p style="margin:0;"> ${randomNews.summary}</p>
+      <p style="margin:0; font-size:0.7rem">ℹ️ click on the headline above 👆🏽 for th full news </p>
+      <p style="margin:0; font-size:0.7rem">ℹ️ ask about news again to get a different* news</p>
+      `
     );
   }
-
   async function getEvents(agent: any) {
     let response = `<h3>Upcoming Events</h3> <div>`;
     let eventsArr: Events[] = [];
@@ -129,7 +132,7 @@ export default function fulfillmentHandler(
 }
 
 // News scrapper function
-export async function scrapeNews() {
+async function scrapeNews() {
   let news: News[] = [];
   const response = await axios.request({
     method: "GET",

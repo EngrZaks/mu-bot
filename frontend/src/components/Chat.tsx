@@ -2,7 +2,7 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import uuid from "react-uuid";
 import React, { ChangeEvent, FormEvent, RefObject } from "react";
 import ChatInput from "./ChatInput";
-import styles from "./chat.module.scss";
+import styles from "./styles.module.scss";
 import SubHero from "./SubHero";
 import ChatItem from "./ChatItem";
 const token = import.meta.env.VITE_TOKEN;
@@ -28,6 +28,18 @@ function Chat() {
     });
   };
 
+  const reqHeaders = new Headers();
+  reqHeaders.append("Content-Type", "application/json");
+  // reqHeaders.append("Authorization", `Bearer ${token}`);
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: reqHeaders,
+    body: JSON.stringify({
+      queryText: input,
+      sessionId: uuid(),
+    }),
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input) return;
@@ -35,18 +47,6 @@ function Chat() {
     setChats((state) => [...state, input]);
     setInput("");
     dummy.current?.scrollIntoView({ behavior: "smooth" });
-    const reqHeaders = new Headers();
-    reqHeaders.append("Content-Type", "application/json");
-    // reqHeaders.append("Authorization", `Bearer ${token}`);
-    const requestOptions: RequestInit = {
-      method: "POST",
-      headers: reqHeaders,
-      body: JSON.stringify({
-        queryText: input,
-        sessionId: uuid(),
-      }),
-    };
-    setLoading(true);
     if (!navigator.onLine) {
       addChat(
         "<span style='color:red;'>Your device is offline, try again later</span>"
@@ -60,16 +60,11 @@ function Chat() {
           setTimeout(() => reject(new Error("timeout")), 10000)
         ),
       ])) as Response;
-      if (response.status == 502) {
-        addChat(
-          "<span style='color:red;'> Connection timeout, try again</span>"
-        );
-      } else if (response.status != 200) {
+
+      if (response.status != 200) {
         addChat("<span style='color:red;'> Network Error, try again</span>");
       } else {
         const data = await response.json();
-        console.log(data.response);
-
         addChat(
           data.response ||
             "<span style='color:red;'> Something is wrong with our Chat service provider. Please Try again!</span>"
@@ -88,7 +83,6 @@ function Chat() {
     }
   };
 
-  // addChat("Hello everyone");
   const handleInput = (e: ChangeEvent) => {
     setInput((e.target as HTMLInputElement).value);
   };
@@ -134,10 +128,9 @@ function Chat() {
             chats.map((chat) => (
               <ChatItem chat={chat} styles={styles} key={uuid()} />
             ))}
-          <Box
-            ref={dummy}
-            sx={{ m: "10px auto", width: "50px", mb: "100px" }}
-          ></Box>
+          <Box ref={dummy} sx={{ m: "10px auto", width: "50px", mb: "100px" }}>
+            {loading && <CircularProgress />}
+          </Box>
         </Box>
       </Box>
       <ChatInput

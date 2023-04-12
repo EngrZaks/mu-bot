@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import React, { ChangeEvent, FormEvent } from "react";
 import { LoadingButton } from "@mui/lab";
+import styles from "./styles.module.scss";
 
 interface InputProps {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -18,23 +19,9 @@ interface InputProps {
 
 function ChatInput({ handleSubmit, input, handleInput, loading }: InputProps) {
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        position: "fixed",
-        bottom: 5,
-        padding: 5,
-        width: "100%",
-        maxWidth: 900,
-        display: "flex",
-        boxShadow: "-3px -2px 4px 2px #e3e3e3",
-        borderRadius: 5,
-        left: "50%",
-        transform: "translateX(-50%)",
-      }}
-    >
+    <form onSubmit={handleSubmit} className={styles.chatForm}>
       <TextField
-        sx={{ bgcolor: "white" }}
+        className={styles.input}
         fullWidth
         placeholder="Ask your question"
         value={input}

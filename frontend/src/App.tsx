@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 import logo from "./assets/logo.png";
 import Chat from "./components/Chat";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import Contacts from "./components/Contacts";
 import { Routes } from "react-router";
@@ -54,7 +54,7 @@ export default function App() {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MU Chat Bot
+        MUBot
       </Typography>
       <Divider />
       <List>
@@ -77,24 +77,30 @@ export default function App() {
         <CssBaseline />
         <HideOnScroll>
           <AppBar component="nav" color="default">
-            <Toolbar>
+            <Toolbar
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <img src={logo} alt="MU logo" height={50} width={45} />
+              <Typography
+                variant="h6"
+                component="div"
+                // sx={{ flexGrow: 1, display: "block" }}
+              >
+                MUBot
+              </Typography>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 edge="end"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, ml: "auto", display: { sm: "none" } }}
+                sx={{ display: { sm: "none" } }}
               >
                 <MenuIcon />
               </IconButton>
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-              >
-                MU Chat Bot
-              </Typography>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {navItems.map((item) => (
                   <Button key={item} sx={{ color: "#000" }}>
