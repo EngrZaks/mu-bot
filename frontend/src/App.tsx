@@ -44,9 +44,9 @@ function HideOnScroll(props: Props) {
 }
 
 export default function App() {
+  // const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  // const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
